@@ -163,7 +163,7 @@ public final class QueryUtils {
                 // Extract the value for the key called "byline"
                 String author = fields.getString(Constants.JSON_KEY_BYLINE);
                 // Extract the value for the key called "firstPublicationDate"
-                long firstPublicationDate = fields.getLong(Constants.JSON_KEY_FIRST_PUBLICATION_DATE);
+                String firstPublicationDate = fields.getString(Constants.JSON_KEY_FIRST_PUBLICATION_DATE);
                 // Extract the value for the key called "thumbnail"
                 String thumbnail = fields.getString(Constants.JSON_KEY_THUMBNAIL);
 

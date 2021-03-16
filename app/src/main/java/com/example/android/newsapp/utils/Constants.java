@@ -81,9 +81,6 @@ public class Constants {
     /** The format we want our API to return */
     public static final String FORMAT = "json";
 
-    /** The show tags we want our API to return */
-    public static final String SHOW_TAGS = "contributor";
-
     /** API Key */
     public static final String API_KEY = "test"; // Use your API Key when API rate limit exceeded
 

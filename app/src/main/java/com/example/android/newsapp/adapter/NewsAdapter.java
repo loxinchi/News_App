@@ -52,45 +52,21 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
 
     @NonNull
     @Override
-    public NewsAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         // to inflate the layout for each item of recycler view.
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.news_card, parent, false);
-        return new ViewHolder(view);
-    }
-
-    @Override
-    public int getItemCount() {
-        // this method is used for showing number
-        // of card items in recycler view.
-        return newsModelArrayList.size();
-    }
-
-    class ViewHolder extends RecyclerView.ViewHolder {
-        private CardView cardView;
-        private TextView headlineTextView;
-        private TextView sectionTextView;
-        private TextView contentTextView;
-        private TextView authorTextView;
-        private TextView timeTextView;
-        private ImageView thumbnailImageView;
-
-        ViewHolder(View itemView) {
-            super(itemView);
-            headlineTextView = itemView.findViewById(R.id.headline_text_view);
-            sectionTextView = itemView.findViewById(R.id.section_text_view);
-            contentTextView = itemView.findViewById(R.id.contents_text_view);
-            authorTextView = itemView.findViewById(R.id.author_text_view);
-            timeTextView = itemView.findViewById(R.id.time_text_view);
-            thumbnailImageView = itemView.findViewById(R.id.card_image_view);
-            cardView = itemView.findViewById(R.id.card_view);
-        }
+//        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.news_card, parent, false);
+//        return new ViewHolder(view);
+        return new ViewHolder(
+                LayoutInflater.from(context)
+                .inflate(R.layout.news_card, parent, false)
+        );
     }
 
     // Set data to textView and imageView of card layout
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         // Find the current news that was clicked on
-        final News currentNews = newsModelArrayList.get(position);
+        News currentNews = newsModelArrayList.get(position);
         // Set text and image to the corresponded textView and imageView
         holder.headlineTextView.setText(currentNews.getHeadline());
         holder.sectionTextView.setText(currentNews.getSection());
@@ -110,6 +86,34 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
                 }
             }
         });
+    }
+
+    @Override
+    public int getItemCount() {
+        // this method is used for showing number
+        // of card items in recycler view.
+        return newsModelArrayList.size();
+    }
+
+    public class ViewHolder extends RecyclerView.ViewHolder {
+        private CardView cardView;
+        private TextView headlineTextView;
+        private TextView sectionTextView;
+        private TextView contentTextView;
+        private TextView authorTextView;
+        private TextView timeTextView;
+        private ImageView thumbnailImageView;
+
+        public ViewHolder(View itemView) {
+            super(itemView);
+            headlineTextView = itemView.findViewById(R.id.headline_text_view);
+            sectionTextView = itemView.findViewById(R.id.section_text_view);
+            contentTextView = itemView.findViewById(R.id.contents_text_view);
+            authorTextView = itemView.findViewById(R.id.author_text_view);
+            timeTextView = itemView.findViewById(R.id.time_text_view);
+            thumbnailImageView = itemView.findViewById(R.id.card_image_view);
+            cardView = itemView.findViewById(R.id.card_view);
+        }
     }
 
     /**

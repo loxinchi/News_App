@@ -1,6 +1,6 @@
 package com.example.android.newsapp;
 
-import android.content.AsyncTaskLoader;
+import androidx.loader.content.AsyncTaskLoader;
 import android.content.Context;
 import android.util.Log;
 

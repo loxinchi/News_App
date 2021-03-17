@@ -194,4 +194,22 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
             return null;
         }
     }
+
+    /**
+     *  Clear all data (a list of {@link News} objects)
+     */
+    public void clearAll() {
+        newsModelArrayList.clear();
+        notifyDataSetChanged();
+    }
+
+    /**
+     * Add  a list of {@link News}
+     * @param newsList is the list of news, which is the data source of the adapter
+     */
+    public void addAll(List<News> newsList) {
+        newsModelArrayList.clear();
+        newsModelArrayList.addAll(newsList);
+        notifyDataSetChanged();
+    }
 }

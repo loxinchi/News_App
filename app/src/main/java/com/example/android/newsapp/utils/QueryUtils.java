@@ -159,7 +159,7 @@ public final class QueryUtils {
                 String sectionName = currentNews.getString(Constants.JSON_KEY_SECTION_NAME);
                 JSONObject fields = currentNews.getJSONObject(Constants.JSON_KEY_FIELDS);
                 // Extract the value for the key called "trailText"
-                String trailText = fields.getString(Constants.JSON_KEY_TRAIL_TEXT);
+//                String trailText = fields.getString(Constants.JSON_KEY_TRAIL_TEXT);
                 // Extract the value for the key called "byline"
                 String author = fields.getString(Constants.JSON_KEY_BYLINE);
                 // Extract the value for the key called "firstPublicationDate"
@@ -168,7 +168,7 @@ public final class QueryUtils {
                 String thumbnail = fields.getString(Constants.JSON_KEY_THUMBNAIL);
 
                 // Create a new {@link Earthquake} object
-                News news = new News(webTitle, sectionName, trailText, author, firstPublicationDate, url, thumbnail);
+                News news = new News(webTitle, sectionName, author, firstPublicationDate, url, thumbnail);
                 // Add the new {@link Earthquake} to the list of earthquakes.
                 newsList.add(news);
                 Log.d(LOG_TAG, "@@@newsList: "+newsList);

@@ -13,8 +13,22 @@
     android:foreground="?android:attr/selectableItemBackground"
     card_view:cardCornerRadius="@dimen/card_corner_radius">
 
+    <RelativeLayout
+        android:id="@+id/main_relative_layout"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent">
+
+    <TextView
+        android:id="@+id/headline_text_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:textAppearanceLarge"
+        android:textStyle="bold"
+        tools:text="headline_text_view" />
+
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_below="@+id/headline_text_view"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/card_margin"
         android:orientation="horizontal">
@@ -28,30 +42,12 @@
             android:layout_marginBottom="@dimen/card_section_margin" >
 
             <TextView
-                android:id="@+id/headline_text_view"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:textAppearanceLarge"
-                android:textStyle="bold"
-                tools:text="headline_text_view" />
-
-            <TextView
                 android:id="@+id/section_text_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentLeft="true"
-                android:layout_below="@+id/headline_text_view"
                 tools:text="section" />
-
-            <TextView
-                android:id="@+id/contents_text_view"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentLeft="true"
-                android:layout_below="@+id/section_text_view"
-                tools:text="contents" />
 
             <TextView
                 android:id="@+id/author_text_view"
@@ -59,7 +55,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentLeft="true"
-                android:layout_below="@+id/contents_text_view"
+                android:paddingTop="79dp"
                 tools:text="author" />
 
             <TextView
@@ -79,4 +75,5 @@
             android:contentDescription="@string/news_thumbnail"
             android:scaleType="centerCrop" />
     </LinearLayout>
+    </RelativeLayout>
 </androidx.cardview.widget.CardView>

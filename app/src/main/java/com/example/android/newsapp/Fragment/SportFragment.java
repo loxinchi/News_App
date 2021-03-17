@@ -102,7 +102,6 @@ public class SportFragment extends Fragment
         uriBuilder.appendQueryParameter("show-fields", "headline,trailText,byline,firstPublicationDate,thumbnail");
         uriBuilder.appendQueryParameter("orderby", "relevance");
         uriBuilder.appendQueryParameter("api-key", "test");
-        Log.d(LOG_TAG, "~~~~~~~~~~~~~~~~~~~~~~~~uriBuilder~~~~~~~~~~~~~~~~~~" + uriBuilder.toString());
 
         // Return the completed uri
         // `http://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&limit=10&minmag=minMagnitude&orderby=time

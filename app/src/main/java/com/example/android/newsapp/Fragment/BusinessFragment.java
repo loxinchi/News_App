@@ -99,13 +99,11 @@ public class BusinessFragment extends Fragment
         uriBuilder.appendQueryParameter("section", "business");
         uriBuilder.appendQueryParameter("format", "json");
         uriBuilder.appendQueryParameter("from-date", "2021-01-01");
-        uriBuilder.appendQueryParameter("show-fields", "headline,trailText,byline,firstPublicationDate,thumbnail");
+        uriBuilder.appendQueryParameter("show-fields", "headline, byline,firstPublicationDate,thumbnail");
         uriBuilder.appendQueryParameter("orderby", "relevance");
         uriBuilder.appendQueryParameter("api-key", "test");
-        Log.d(LOG_TAG, "~~~~~~~~~~~~~~~~~~~~~~~~uriBuilder~~~~~~~~~~~~~~~~~~" + uriBuilder.toString());
 
         // Return the completed uri
-        // `http://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&limit=10&minmag=minMagnitude&orderby=time
         return new NewsLoader(getActivity(), uriBuilder.toString());
     }
 
@@ -113,8 +111,6 @@ public class BusinessFragment extends Fragment
     public void onLoadFinished(@NonNull Loader<List<News>> loader, List<News> newsInfo) {
         // Clear the adapter of previous clear data
         mAdapter.clearAll();
-        // If there is a valid list of {@link Earthquake}s, then add them to the adapter's
-        // data set. This will trigger the ListView to update.
         if (newsInfo != null && !newsInfo.isEmpty()) {
             mAdapter.addAll(newsInfo);// Can be comment out when testing setEmptyView()
         }

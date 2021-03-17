@@ -3,6 +3,8 @@ package com.example.android.newsapp.adapter;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.text.format.DateUtils;
@@ -21,6 +23,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.android.newsapp.News;
 import com.example.android.newsapp.R;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 import java.text.ParseException;
@@ -70,10 +73,23 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
         // Set text and image to the corresponded textView and imageView
         holder.headlineTextView.setText(currentNews.getHeadline());
         holder.sectionTextView.setText(currentNews.getSection());
-        holder.contentTextView.setText(currentNews.getContents());
-        holder.authorTextView.setText(currentNews.getAuthor());
+
+        // If the author does not exist, hide the authorTextView
+        if (currentNews.getAuthor() == null) {
+            holder.authorTextView.setVisibility(View.GONE);
+        } else {
+            holder.authorTextView.setVisibility(View.VISIBLE);
+            holder.authorTextView.setText(currentNews.getAuthor());
+        }
+
         holder.timeTextView.setText(getTimeDifference(formatDate(currentNews.getTimeInMilliseconds())));
-        holder.thumbnailImageView.setImageDrawable(LoadImageFromWebOperations(currentNews.getThumbnailUrl()));
+
+        //Display thumbnail image
+        try {
+            holder.thumbnailImageView.setImageBitmap(LoadImageFromWebOperations(currentNews.getThumbnailUrl()));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         // Set OnClickListener to browse by the news article URL
         holder.cardView.setOnClickListener(new View.OnClickListener() {
@@ -108,7 +124,8 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
             super(itemView);
             headlineTextView = itemView.findViewById(R.id.headline_text_view);
             sectionTextView = itemView.findViewById(R.id.section_text_view);
-            contentTextView = itemView.findViewById(R.id.contents_text_view);
+//            contentTextView = itemView.findViewById(R.id.contents_text_view);
+
             authorTextView = itemView.findViewById(R.id.author_text_view);
             timeTextView = itemView.findViewById(R.id.time_text_view);
             thumbnailImageView = itemView.findViewById(R.id.card_image_view);
@@ -184,15 +201,10 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
      * @param url string url of the news thumbnail
      * @return Drawable image
      */
-    private static Drawable LoadImageFromWebOperations(String url) {
-        try {
-            InputStream inputStream = (InputStream) new URL(url).getContent();
-            Drawable drawableImage = Drawable.createFromStream(inputStream, "thumbnailImage");
-            return drawableImage;
-        } catch (Exception e) {
-            Log.e(LOG_TAG, "Problem download drawable error: " + e.getMessage());
-            return null;
-        }
+    private static Bitmap LoadImageFromWebOperations(String url) throws IOException {
+        URL thumbnailImageURL = new URL(url);
+        Bitmap bmp = BitmapFactory.decodeStream(thumbnailImageURL.openConnection().getInputStream());
+        return bmp;
     }
 
     /**

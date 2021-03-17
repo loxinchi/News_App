@@ -13,7 +13,7 @@ public class News {
     private String mSection;
 
     /** String resource ID for news contents */
-    private String mContents;
+//    private String mContents;
 
     /** String resource ID for news author */
     private String mAuthor;
@@ -32,16 +32,16 @@ public class News {
      *
      * @param headline is the string resource Id for the news headline
      * @param section is the string resource Id for the news section
-     * @param contents is the string resource Id for the news contents
+//     * @param contents is the string resource Id for the news contents
      * @param author is the string resource Id for the news author
      * @param timeInMilliseconds is the resource ID for the date
      * @param url is the website URL to news article
      * @param thumbnailUrl is the URL of the news thumbnail image
      * */
-    public News (String headline, String section, String contents, String author, String timeInMilliseconds, String url, String thumbnailUrl) {
+    public News (String headline, String section, String author, String timeInMilliseconds, String url, String thumbnailUrl) {
         mHeadline = headline;
         mSection = section;
-        mContents = contents;
+//        mContents = contents;
         mAuthor = author;
         mTimeInMilliseconds = timeInMilliseconds;
         mUrl = url;
@@ -65,9 +65,9 @@ public class News {
     /**
      * Get the string resource ID for news contents
      */
-    public String getContents() {
-        return mContents;
-    }
+//    public String getContents() {
+//        return mContents;
+//    }
 
     /**
      * Get the string resource ID for news author

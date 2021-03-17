@@ -1,7 +1,6 @@
 package com.example.android.newsapp.Fragment;
 
 import android.content.Context;
-import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
@@ -106,10 +105,8 @@ public class WorldFragment extends Fragment
         uriBuilder.appendQueryParameter("show-fields", "headline,trailText,byline,firstPublicationDate,thumbnail");
         uriBuilder.appendQueryParameter("orderby", "relevance");
         uriBuilder.appendQueryParameter("api-key", "test");
-        Log.d(LOG_TAG, "~~~~~~~~~~~~~~~~~~~~~~~~uriBuilder~~~~~~~~~~~~~~~~~~" + uriBuilder.toString());
 
         // Return the completed uri
-        // `http://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&limit=10&minmag=minMagnitude&orderby=time
         return new NewsLoader(getActivity(), uriBuilder.toString());
     }
 

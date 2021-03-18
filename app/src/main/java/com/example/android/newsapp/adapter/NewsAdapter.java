@@ -2,17 +2,16 @@ package com.example.android.newsapp.adapter;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.text.format.DateUtils;
+import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -37,7 +36,6 @@ import java.util.TimeZone;
 public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
 
     private static final String LOG_TAG = NewsAdapter.class.getSimpleName();
-    private static final String CONTENTS_RESTRICTION = " ... ";
     private Context context;
     private ArrayList<News> newsModelArrayList;
 
@@ -85,11 +83,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
         holder.timeTextView.setText(getTimeDifference(formatDate(currentNews.getTimeInMilliseconds())));
 
         //Display thumbnail image
-        try {
-            holder.thumbnailImageView.setImageBitmap(LoadImageFromWebOperations(currentNews.getThumbnailUrl()));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        new DownloadThumbnailImageTask(holder.thumbnailImageView).execute(currentNews.getThumbnailUrl());
 
         // Set OnClickListener to browse by the news article URL
         holder.cardView.setOnClickListener(new View.OnClickListener() {
@@ -124,8 +118,6 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
             super(itemView);
             headlineTextView = itemView.findViewById(R.id.headline_text_view);
             sectionTextView = itemView.findViewById(R.id.section_text_view);
-//            contentTextView = itemView.findViewById(R.id.contents_text_view);
-
             authorTextView = itemView.findViewById(R.id.author_text_view);
             timeTextView = itemView.findViewById(R.id.time_text_view);
             thumbnailImageView = itemView.findViewById(R.id.card_image_view);
@@ -197,17 +189,6 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
     }
 
     /**
-     * Get thumbnail image from news thumbnail URL
-     * @param url string url of the news thumbnail
-     * @return Drawable image
-     */
-    private static Bitmap LoadImageFromWebOperations(String url) throws IOException {
-        URL thumbnailImageURL = new URL(url);
-        Bitmap bmp = BitmapFactory.decodeStream(thumbnailImageURL.openConnection().getInputStream());
-        return bmp;
-    }
-
-    /**
      *  Clear all data (a list of {@link News} objects)
      */
     public void clearAll() {
@@ -223,5 +204,32 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
         newsModelArrayList.clear();
         newsModelArrayList.addAll(newsList);
         notifyDataSetChanged();
+    }
+
+    /**
+     * Download thumbnail image
+     */
+    private class DownloadThumbnailImageTask extends AsyncTask<String, Void, Bitmap> {
+        ImageView bmImage;
+        public DownloadThumbnailImageTask(ImageView bmImage) {
+            this.bmImage = bmImage;
+        }
+
+        protected Bitmap doInBackground(String... urls) {
+            String urldisplay = urls[0];
+            Bitmap mIcon11 = null;
+            try {
+                InputStream in = new java.net.URL(urldisplay).openStream();
+                mIcon11 = BitmapFactory.decodeStream(in);
+            } catch (Exception e) {
+                Log.e("Error", e.getMessage());
+                e.printStackTrace();
+            }
+            return mIcon11;
+        }
+
+        protected void onPostExecute(Bitmap result) {
+            bmImage.setImageBitmap(result);
+        }
     }
 }

@@ -23,7 +23,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textAppearance="?android:textAppearanceLarge"
-        android:textStyle="bold"
+        style="@style/HeadlineTextViewStyle"
         tools:text="headline_text_view" />
 
     <LinearLayout
@@ -39,14 +39,16 @@
             android:layout_height="wrap_content"
             android:layout_weight="6"
             android:layout_marginTop="@dimen/card_section_margin"
-            android:layout_marginBottom="@dimen/card_section_margin" >
+            android:layout_marginBottom="@dimen/card_section_margin"
+            style="@style/SectionAuthorDateStyle">
 
-            <TextView
+        <TextView
                 android:id="@+id/section_text_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentLeft="true"
+                style="@style/SectionTextViewStyle"
                 tools:text="section" />
 
             <TextView
@@ -56,6 +58,7 @@
                 android:layout_alignParentStart="true"
                 android:layout_alignParentLeft="true"
                 android:paddingTop="79dp"
+                style="@style/AuthorTextViewStyle"
                 tools:text="author" />
 
             <TextView
@@ -65,6 +68,7 @@
                 android:layout_below="@+id/author_text_view"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentLeft="true"
+                style="@style/DateTextViewStyle"
                 tools:text="Time" />
         </RelativeLayout>
 
@@ -75,5 +79,7 @@
             android:contentDescription="@string/news_thumbnail"
             android:scaleType="centerCrop" />
     </LinearLayout>
+
     </RelativeLayout>
+
 </androidx.cardview.widget.CardView>

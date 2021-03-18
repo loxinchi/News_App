@@ -16,20 +16,16 @@
             android:id="@+id/tablayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="top"
-            app:tabMode="fixed"
-            app:tabGravity="fill"
-            app:tabIndicatorHeight="3dp"
-            android:fontFamily="sans-serif-medium"
-            app:tabTextColor="@color/white"/>
-<!--            app:tabIndicatorColor="@color/pink_300"            -->
-<!--            android:background="@color/blue_700"-->
+            style="@style/CategoryTab"
+            android:theme="@style/TabLayout_Theme"/>
+
     </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/viewpager"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        app:tabMaxWidth="20dp">
 
     </androidx.viewpager.widget.ViewPager>
 

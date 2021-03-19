@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    android:orientation="vertical">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appbar"
@@ -14,10 +13,10 @@
 
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tablayout"
+            style="@style/CategoryTab"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            style="@style/CategoryTab"
-            android:theme="@style/TabLayout_Theme"/>
+            android:theme="@style/TabLayout_Theme" />
 
     </com.google.android.material.appbar.AppBarLayout>
 
@@ -29,4 +28,4 @@
 
     </androidx.viewpager.widget.ViewPager>
 
-</RelativeLayout>
+</LinearLayout>

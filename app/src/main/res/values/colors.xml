@@ -16,10 +16,10 @@
     <color name="pink_300">#ffcdd2</color>
     <color name="pink_200">#fce4ec</color>
 
-    <color name="colorPrimary">#c9b2ba</color>
+    <color name="colorPrimary">#ff94c2</color>
     <color name="colorPrimaryDark">#fce4ec</color>
     <color name="textColorPrimary">#FF000000</color>
-    <color name="colorAccent">#fce4ec</color>
+    <color name="colorAccent">#f8bbd0</color>
     <color name="titleTextColor">#FF000000</color>
     <color name="subtitleTextColor">#FF000000</color>
 

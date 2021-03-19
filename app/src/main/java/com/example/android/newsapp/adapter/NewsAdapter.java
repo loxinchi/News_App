@@ -81,6 +81,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
         }
 
         holder.timeTextView.setText(getTimeDifference(formatDate(currentNews.getTimeInMilliseconds())));
+        Log.d(LOG_TAG, "!!timeDiff: " + getTimeDifference(formatDate(currentNews.getTimeInMilliseconds())));
 
         //Display thumbnail image
         new DownloadThumbnailImageTask(holder.thumbnailImageView).execute(currentNews.getThumbnailUrl());

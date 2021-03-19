@@ -99,9 +99,11 @@ public class BusinessFragment extends Fragment
         uriBuilder.appendQueryParameter("section", "business");
         uriBuilder.appendQueryParameter("format", "json");
         uriBuilder.appendQueryParameter("from-date", "2021-01-01");
-        uriBuilder.appendQueryParameter("show-fields", "headline, byline,firstPublicationDate,thumbnail");
+        uriBuilder.appendQueryParameter("show-fields", "headline,byline,firstPublicationDate,thumbnail");
         uriBuilder.appendQueryParameter("orderby", "relevance");
         uriBuilder.appendQueryParameter("api-key", "test");
+
+        Log.d(LOG_TAG, "&&uriBuilder.toString()) : " + uriBuilder.toString());
 
         // Return the completed uri
         return new NewsLoader(getActivity(), uriBuilder.toString());

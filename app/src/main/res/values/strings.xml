@@ -6,4 +6,5 @@
     <string name="technology_tab_title">tech</string>
     <string name="sport_tab_title">sport</string>
     <string name="business_tab_title">business</string>
+    <string name="nothing_here">Nothing here</string>
 </resources>

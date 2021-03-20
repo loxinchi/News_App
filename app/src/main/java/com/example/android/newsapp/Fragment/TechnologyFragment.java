@@ -19,6 +19,7 @@ import androidx.loader.content.Loader;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.android.newsapp.MyRecyclerView;
 import com.example.android.newsapp.News;
 import com.example.android.newsapp.NewsLoader;
 import com.example.android.newsapp.R;
@@ -66,9 +67,15 @@ public class TechnologyFragment extends Fragment
 
         // Create a list of guides
         mAdapter = new NewsAdapter(getActivity(), new ArrayList<News>());
-        RecyclerView recyclerView = (RecyclerView) rootView.findViewById(R.id.recycle_list);
+        MyRecyclerView recyclerView = (MyRecyclerView) rootView.findViewById(R.id.recycle_list);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setAdapter(mAdapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        recyclerView.setLayoutManager(layoutManager);
+
+        //Set to empty view if no data
+        mEmptyStateTextView = rootView.findViewById(R.id.empty_view);
+        recyclerView.setEmptyView(mEmptyStateTextView);
+
 
         if(isConnected()){
             // Get a reference to the LoaderManager, in order to interact with loaders.
@@ -114,7 +121,7 @@ public class TechnologyFragment extends Fragment
         // If there is a valid list of {@link Earthquake}s, then add them to the adapter's
         // data set. This will trigger the ListView to update.
         if (newsInfo != null && !newsInfo.isEmpty()) {
-            mAdapter.addAll(newsInfo);// Can be comment out when testing setEmptyView()
+            mAdapter.addAll(newsInfo);
         }
     }
 

@@ -34,10 +34,7 @@ public final class QueryUtils {
      * Query the The Guardian dataset and return a list of {@link News} objects.
      */
     public static List<News> fetchNewsData(String requestUrl) {
-        Log.d(LOG_TAG, "*******************fetchEarthquakeData");
-
         URL url = createUrl(requestUrl);
-
         // Test for slow AsyncLoader delay 2secs
         String jsonResponse = null;
         try {
@@ -50,9 +47,7 @@ public final class QueryUtils {
         } catch (IOException e) {
             Log.e(LOG_TAG, "Problem making the HTTP request.", e);
         }
-
         List<News> gardianNews = extractFeatureFromJson(jsonResponse);
-
         return gardianNews;
     }
 
@@ -74,11 +69,9 @@ public final class QueryUtils {
      */
     private static String makeHttpRequest(URL url) throws IOException {
         String jsonResponse = "";
-
         if (url == null) {
             return jsonResponse;
         }
-
         HttpURLConnection urlConnection = null;
         InputStream inputStream = null;
         try {
@@ -87,7 +80,6 @@ public final class QueryUtils {
             urlConnection.setConnectTimeout(Constants.CONNECT_TIMEOUT);
             urlConnection.setRequestMethod(Constants.REQUEST_METHOD_GET);
             urlConnection.connect();
-
             // If the request was successful (response code 200),
             // then read the input stream and parse the response.
             if (urlConnection.getResponseCode() == Constants.SUCCESS_RESPONSE_CODE) {
@@ -147,7 +139,6 @@ public final class QueryUtils {
             JSONObject responseJsonObject = baseJsonResponse.getJSONObject(Constants.JSON_KEY_RESPONSE);
             // Extract the JSONArray associated with the key called "results"
             JSONArray newsArray = responseJsonObject.getJSONArray(Constants.JSON_KEY_RESULTS);
-
             // For each earthquake in the earthquakeArray, create an {@link Earthquake} object
             for (int i = 0; i < newsArray.length(); i++) {
                 JSONObject currentNews = newsArray.getJSONObject(i);
@@ -166,12 +157,10 @@ public final class QueryUtils {
                 String firstPublicationDate = fields.getString(Constants.JSON_KEY_FIRST_PUBLICATION_DATE);
                 // Extract the value for the key called "thumbnail"
                 String thumbnail = fields.getString(Constants.JSON_KEY_THUMBNAIL);
-
                 // Create a new {@link Earthquake} object
                 News news = new News(webTitle, sectionName, author, firstPublicationDate, url, thumbnail);
                 // Add the new {@link Earthquake} to the list of earthquakes.
                 newsList.add(news);
-                Log.d(LOG_TAG, "@@@newsList: "+newsList);
             }
         } catch (JSONException e) {
             // If an error is thrown when executing any of the above statements in the "try" block,

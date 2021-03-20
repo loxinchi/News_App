@@ -1,10 +1,12 @@
 package com.example.android.newsapp.Fragment;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -54,9 +56,6 @@ public class BusinessFragment extends Fragment
      */
     private NewsAdapter mAdapter;
 
-    private ProgressBar progressBar;
-
-
     public BusinessFragment() {
         // Required empty public constructor
     }
@@ -68,18 +67,16 @@ public class BusinessFragment extends Fragment
                              @Nullable Bundle savedInstanceState) {
 
         View rootView = inflater.inflate(R.layout.recycle, container, false);
-
         // Create a list of guides
         mAdapter = new NewsAdapter(getActivity(), new ArrayList<News>());
         MyRecyclerView recyclerView = (MyRecyclerView) rootView.findViewById(R.id.recycle_list);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setAdapter(mAdapter);
         recyclerView.setLayoutManager(layoutManager);
-
         //Set to empty view if no data
         mEmptyStateTextView = rootView.findViewById(R.id.empty_view);
         recyclerView.setEmptyView(mEmptyStateTextView);
-
+        // Check network status
         if (isConnected()) {
             // Get a reference to the LoaderManager, in order to interact with loaders.
             LoaderManager loaderManager = getLoaderManager();
@@ -91,29 +88,30 @@ public class BusinessFragment extends Fragment
             // Set empty state text to display "No earthquakes found."
             mEmptyStateTextView.setText(R.string.no_internet_connection);
         }
-
         return rootView;
     }
 
     @NonNull
     @Override
     public Loader<List<News>> onCreateLoader(int id, @Nullable Bundle args) {
+        SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(getContext());
+        // getString retrieves a String value from the preferences.
+        // The second parameter is the default value for this preference.
+        String orderBy = sharedPrefs.getString(
+                getString(R.string.settings_order_by_key),
+                getString(R.string.settings_order_by_default)
+        );
         // parse breaks apart the URI string that's passed into its parameter
         Uri baseUri = Uri.parse(GUARDIAN_REQUEST_URL);
-
         // buildUpon prepares the baseUri that we just parsed so we can add query parameters to it
         Uri.Builder uriBuilder = baseUri.buildUpon();
-
         // Append query parameter and its value. For example, the `format=json`
         uriBuilder.appendQueryParameter("section", "business");
         uriBuilder.appendQueryParameter("format", "json");
         uriBuilder.appendQueryParameter("from-date", "2021-01-01");
         uriBuilder.appendQueryParameter("show-fields", "headline,byline,firstPublicationDate,thumbnail");
-        uriBuilder.appendQueryParameter("orderby", "relevance");
+        uriBuilder.appendQueryParameter("orderby", orderBy);
         uriBuilder.appendQueryParameter("api-key", "test");
-
-        Log.d(LOG_TAG, "&&uriBuilder.toString()) : " + uriBuilder.toString());
-
         // Return the completed uri
         return new NewsLoader(getActivity(), uriBuilder.toString());
     }

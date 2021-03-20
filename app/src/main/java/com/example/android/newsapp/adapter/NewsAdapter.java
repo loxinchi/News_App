@@ -36,8 +36,6 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
     private Context context;
     private ArrayList<News> newsModelArrayList;
 
-    // Constructor
-
     /**
      * Create a new {@link NewsAdapter} object.
      *
@@ -67,7 +65,6 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
         // Set text and image to the corresponded textView and imageView
         holder.headlineTextView.setText(currentNews.getHeadline());
         holder.sectionTextView.setText(currentNews.getSection());
-
         // If the author does not exist, hide the authorTextView
         if (currentNews.getAuthor() == null) {
             holder.authorTextView.setVisibility(View.GONE);
@@ -75,12 +72,9 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
             holder.authorTextView.setVisibility(View.VISIBLE);
             holder.authorTextView.setText(currentNews.getAuthor());
         }
-
         holder.timeTextView.setText(getTimeDifference(formatDate(currentNews.getTimeInMilliseconds())));
-
         //Display thumbnail image
         new DownloadThumbnailImageTask(holder.thumbnailImageView).execute(currentNews.getThumbnailUrl());
-
         // Set OnClickListener to browse by the news article URL
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override

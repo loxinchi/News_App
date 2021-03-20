@@ -1,10 +1,12 @@
 package com.example.android.newsapp.Fragment;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -64,7 +66,6 @@ public class SportFragment extends Fragment
                              @Nullable Bundle savedInstanceState) {
 
         View rootView = inflater.inflate(R.layout.recycle, container, false);
-
         // Create a list of guides
         mAdapter = new NewsAdapter(getActivity(), new ArrayList<News>());
         MyRecyclerView recyclerView = (MyRecyclerView) rootView.findViewById(R.id.recycle_list);
@@ -76,7 +77,7 @@ public class SportFragment extends Fragment
         mEmptyStateTextView = rootView.findViewById(R.id.empty_view);
         recyclerView.setEmptyView(mEmptyStateTextView);
 
-
+        // Check network status
         if (isConnected()) {
             // Get a reference to the LoaderManager, in order to interact with loaders.
             LoaderManager loaderManager = getLoaderManager();
@@ -95,22 +96,25 @@ public class SportFragment extends Fragment
     @NonNull
     @Override
     public Loader<List<News>> onCreateLoader(int id, @Nullable Bundle args) {
+        SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(getContext());
+        // getString retrieves a String value from the preferences.
+        // The second parameter is the default value for this preference.
+        String orderBy = sharedPrefs.getString(
+                getString(R.string.settings_order_by_key),
+                getString(R.string.settings_order_by_default)
+        );
         // parse breaks apart the URI string that's passed into its parameter
         Uri baseUri = Uri.parse(GUARDIAN_REQUEST_URL);
-
         // buildUpon prepares the baseUri that we just parsed so we can add query parameters to it
         Uri.Builder uriBuilder = baseUri.buildUpon();
-
         // Append query parameter and its value. For example, the `format=json`
         uriBuilder.appendQueryParameter("section", "sport");
         uriBuilder.appendQueryParameter("format", "json");
         uriBuilder.appendQueryParameter("from-date", "2021-01-01");
         uriBuilder.appendQueryParameter("show-fields", "headline,trailText,byline,firstPublicationDate,thumbnail");
-        uriBuilder.appendQueryParameter("orderby", "relevance");
+        uriBuilder.appendQueryParameter("orderby", orderBy);
         uriBuilder.appendQueryParameter("api-key", "test");
-
         // Return the completed uri
-        // `http://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&limit=10&minmag=minMagnitude&orderby=time
         return new NewsLoader(getActivity(), uriBuilder.toString());
     }
 

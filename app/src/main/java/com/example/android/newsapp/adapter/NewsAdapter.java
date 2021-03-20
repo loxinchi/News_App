@@ -7,7 +7,6 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.text.format.DateUtils;
-import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,9 +21,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.android.newsapp.News;
 import com.example.android.newsapp.R;
 
-import java.io.IOException;
 import java.io.InputStream;
-import java.net.URL;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -40,11 +37,12 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
     private ArrayList<News> newsModelArrayList;
 
     // Constructor
+
     /**
      * Create a new {@link NewsAdapter} object.
      *
-     * @param context                   is the current context (i.e. Activity) that the adapter is being created in.
-     * @param newsModelArrayList        is the list of {@link News} to be displayed.
+     * @param context            is the current context (i.e. Activity) that the adapter is being created in.
+     * @param newsModelArrayList is the list of {@link News} to be displayed.
      */
     public NewsAdapter(Context context, ArrayList<News> newsModelArrayList) {
         this.context = context;
@@ -55,11 +53,9 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         // to inflate the layout for each item of recycler view.
-//        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.news_card, parent, false);
-//        return new ViewHolder(view);
         return new ViewHolder(
                 LayoutInflater.from(context)
-                .inflate(R.layout.news_card, parent, false)
+                        .inflate(R.layout.news_card, parent, false)
         );
     }
 
@@ -81,7 +77,6 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
         }
 
         holder.timeTextView.setText(getTimeDifference(formatDate(currentNews.getTimeInMilliseconds())));
-        Log.d(LOG_TAG, "!!timeDiff: " + getTimeDifference(formatDate(currentNews.getTimeInMilliseconds())));
 
         //Display thumbnail image
         new DownloadThumbnailImageTask(holder.thumbnailImageView).execute(currentNews.getThumbnailUrl());
@@ -158,6 +153,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
 
     /**
      * Get the formatted first Publication Date string in milliseconds
+     *
      * @param formattedDate string of the formatted first Publication Date
      * @return milliseconds of the formatted first Publication Date
      */
@@ -171,7 +167,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
             dateMilliseconds = dateObj.getTime();
             return dateMilliseconds;
         } catch (ParseException e) {
-            Log.e(LOG_TAG, "Problem parsing date error: "+  e.getMessage());
+            Log.e(LOG_TAG, "Problem parsing date error: " + e.getMessage());
             e.printStackTrace();
         }
         return 0;
@@ -179,6 +175,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
 
     /**
      * Get the time difference between the current date and first Publication Date Time
+     *
      * @param formattedDate string of the formatted first Publication Date Time
      * @return time difference (i.e "1 day ago")
      */
@@ -190,7 +187,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
     }
 
     /**
-     *  Clear all data (a list of {@link News} objects)
+     * Clear all data (a list of {@link News} objects)
      */
     public void clearAll() {
         newsModelArrayList.clear();
@@ -199,6 +196,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
 
     /**
      * Add  a list of {@link News}
+     *
      * @param newsList is the list of news, which is the data source of the adapter
      */
     public void addAll(List<News> newsList) {
@@ -208,10 +206,11 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
     }
 
     /**
-     * Download thumbnail image
+     * Download thumbnail image.
      */
     private class DownloadThumbnailImageTask extends AsyncTask<String, Void, Bitmap> {
         ImageView bmImage;
+
         public DownloadThumbnailImageTask(ImageView bmImage) {
             this.bmImage = bmImage;
         }
@@ -229,6 +228,11 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
             return mIcon11;
         }
 
+        /**
+         * Set thumbnail image once download is completed.
+         *
+         * @param result is the Bitmap from DownloadThumbnailImageTask()
+         */
         protected void onPostExecute(Bitmap result) {
             bmImage.setImageBitmap(result);
         }

@@ -1,8 +1,8 @@
 package com.example.android.newsapp;
 
 import androidx.loader.content.AsyncTaskLoader;
+
 import android.content.Context;
-import android.util.Log;
 
 import com.example.android.newsapp.utils.QueryUtils;
 
@@ -13,17 +13,21 @@ import java.util.List;
  */
 public class NewsLoader extends AsyncTaskLoader<List<News>> {
 
-    /** Tag for log messages */
+    /**
+     * Tag for log messages
+     */
     private static final String LOG_TAG = NewsLoader.class.getName();
 
-    /** Query URL */
+    /**
+     * Query URL
+     */
     private String mUrl;
 
     /**
      * Constructs a new {@link News}.
      *
      * @param context of the activity
-     * @param url to load data from
+     * @param url     to load data from
      */
     public NewsLoader(Context context, String url) {
         super(context);

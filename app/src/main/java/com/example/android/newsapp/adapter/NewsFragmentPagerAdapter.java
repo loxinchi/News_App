@@ -18,15 +18,17 @@ import com.example.android.newsapp.R;
  */
 public class NewsFragmentPagerAdapter extends FragmentPagerAdapter {
 
-    /** Context of the app */
+    /**
+     * Context of the app
+     */
     private Context mContext;
 
     /**
      * Create a new {@link NewsFragmentPagerAdapter} object.
      *
      * @param context is the context of the app
-     * @param fm is the fragment manager that will keep each fragment's state in the adapter
-     * across swipes.
+     * @param fm      is the fragment manager that will keep each fragment's state in the adapter
+     *                across swipes.
      */
     public NewsFragmentPagerAdapter(Context context, @NonNull FragmentManager fm) {
         super(fm);

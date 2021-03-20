@@ -2,40 +2,52 @@ package com.example.android.newsapp;
 
 /**
  * {@link News} represents the News information that introduced in this app.
- *  It contains resource IDs for news headline, news section, author, time, Image URL, Website URL.
+ * It contains resource IDs for news headline, news section, author, time, Image URL, Website URL.
  */
 public class News {
 
-    /** String resource ID for news headline */
+    /**
+     * String resource ID for news headline
+     */
     private String mHeadline;
 
-    /** String resource ID for news section */
+    /**
+     * String resource ID for news section
+     */
     private String mSection;
 
-    /** String resource ID for news author */
+    /**
+     * String resource ID for news author
+     */
     private String mAuthor;
 
-    /** Time of the news article */
+    /**
+     * Time of the news article
+     */
     private String mTimeInMilliseconds;
 
-    /** Website URL of the news article */
+    /**
+     * Website URL of the news article
+     */
     private String mUrl;
 
-    /** Thumbnail image URL of the news */
+    /**
+     * Thumbnail image URL of the news
+     */
     private String mThumbnailUrl;
 
     /**
      * Create a new Word object.
      *
-     * @param headline is the string resource Id for the news headline
-     * @param section is the string resource Id for the news section
-//     * @param contents is the string resource Id for the news contents
-     * @param author is the string resource Id for the news author
+     * @param headline           is the string resource Id for the news headline
+     * @param section            is the string resource Id for the news section
+     *                           //     * @param contents is the string resource Id for the news contents
+     * @param author             is the string resource Id for the news author
      * @param timeInMilliseconds is the resource ID for the date
-     * @param url is the website URL to news article
-     * @param thumbnailUrl is the URL of the news thumbnail image
-     * */
-    public News (String headline, String section, String author, String timeInMilliseconds, String url, String thumbnailUrl) {
+     * @param url                is the website URL to news article
+     * @param thumbnailUrl       is the URL of the news thumbnail image
+     */
+    public News(String headline, String section, String author, String timeInMilliseconds, String url, String thumbnailUrl) {
         mHeadline = headline;
         mSection = section;
         mAuthor = author;

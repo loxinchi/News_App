@@ -28,7 +28,6 @@ import com.example.android.newsapp.adapter.NewsAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 public class BusinessFragment extends Fragment
         implements LoaderManager.LoaderCallbacks<List<News>> {
@@ -81,7 +80,7 @@ public class BusinessFragment extends Fragment
         mEmptyStateTextView = rootView.findViewById(R.id.empty_view);
         recyclerView.setEmptyView(mEmptyStateTextView);
 
-        if(isConnected()){
+        if (isConnected()) {
             // Get a reference to the LoaderManager, in order to interact with loaders.
             LoaderManager loaderManager = getLoaderManager();
             loaderManager.initLoader(NEWS_LOADER_ID, null, this);
@@ -131,13 +130,13 @@ public class BusinessFragment extends Fragment
     }
 
     @Override
-    public void onLoaderReset (@NonNull Loader<List<News>> loader) {
+    public void onLoaderReset(@NonNull Loader<List<News>> loader) {
         // Loader reset, so we can clear out our existing data.
         mAdapter.clearAll();
     }
 
     /**
-     *  Check for network connectivity.
+     * Check for network connectivity.
      */
     private boolean isConnected() {
         // Get a reference to the ConnectivityManager to check state of network connectivity

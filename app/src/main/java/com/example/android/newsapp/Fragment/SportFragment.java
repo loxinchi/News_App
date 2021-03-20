@@ -83,11 +83,10 @@ public class SportFragment extends Fragment
             loaderManager.initLoader(NEWS_LOADER_ID, null, this);
         } else {
             // Hide loading indicator because no_internet_connection
-//            View loadingIndicator = findViewById(R.id.loading_indicator);
-//            loadingIndicator.setVisibility(View.GONE);
-
+            View loadingIndicator = rootView.findViewById(R.id.progress_bar);
+            loadingIndicator.setVisibility(View.GONE);
             // Set empty state text to display "No earthquakes found."
-//            mEmptyStateTextView.setText(R.string.no_internet_connection);
+            mEmptyStateTextView.setText(R.string.no_internet_connection);
         }
 
         return rootView;
@@ -124,7 +123,7 @@ public class SportFragment extends Fragment
         // If there is a valid list of {@link Earthquake}s, then add them to the adapter's
         // data set. This will trigger the ListView to update.
         if (newsInfo != null && !newsInfo.isEmpty()) {
-//            mAdapter.addAll(newsInfo);
+            mAdapter.addAll(newsInfo);
         }
     }
 

@@ -86,7 +86,10 @@ public class BusinessFragment extends Fragment
             LoaderManager loaderManager = getLoaderManager();
             loaderManager.initLoader(NEWS_LOADER_ID, null, this);
         } else {
-            //Set empty state text to display "No earthquakes found."
+            // Hide loading indicator because no_internet_connection
+            View loadingIndicator = rootView.findViewById(R.id.progress_bar);
+            loadingIndicator.setVisibility(View.GONE);
+            // Set empty state text to display "No earthquakes found."
             mEmptyStateTextView.setText(R.string.no_internet_connection);
         }
 
@@ -123,7 +126,7 @@ public class BusinessFragment extends Fragment
         // Clear the adapter of previous clear data
         mAdapter.clearAll();
         if (newsInfo != null && !newsInfo.isEmpty()) {
-//            mAdapter.addAll(newsInfo);
+            mAdapter.addAll(newsInfo);
         }
     }
 

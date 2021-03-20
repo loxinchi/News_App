@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -27,6 +28,7 @@ import com.example.android.newsapp.adapter.NewsAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 public class BusinessFragment extends Fragment
         implements LoaderManager.LoaderCallbacks<List<News>> {
@@ -52,6 +54,9 @@ public class BusinessFragment extends Fragment
      * Adapter for the list of news
      */
     private NewsAdapter mAdapter;
+
+    private ProgressBar progressBar;
+
 
     public BusinessFragment() {
         // Required empty public constructor
@@ -81,12 +86,8 @@ public class BusinessFragment extends Fragment
             LoaderManager loaderManager = getLoaderManager();
             loaderManager.initLoader(NEWS_LOADER_ID, null, this);
         } else {
-            // Hide loading indicator because no_internet_connection
-//            View loadingIndicator = findViewById(R.id.loading_indicator);
-//            loadingIndicator.setVisibility(View.GONE);
-
-            // Set empty state text to display "No earthquakes found."
-//            mEmptyStateTextView.setText(R.string.no_internet_connection);
+            //Set empty state text to display "No earthquakes found."
+            mEmptyStateTextView.setText(R.string.no_internet_connection);
         }
 
         return rootView;
@@ -117,10 +118,12 @@ public class BusinessFragment extends Fragment
 
     @Override
     public void onLoadFinished(@NonNull Loader<List<News>> loader, List<News> newsInfo) {
+        // Hide loading indicator because the data has been loaded
+        getView().findViewById(R.id.progress_bar).setVisibility(View.GONE);
         // Clear the adapter of previous clear data
         mAdapter.clearAll();
         if (newsInfo != null && !newsInfo.isEmpty()) {
-            mAdapter.addAll(newsInfo);
+//            mAdapter.addAll(newsInfo);
         }
     }
 

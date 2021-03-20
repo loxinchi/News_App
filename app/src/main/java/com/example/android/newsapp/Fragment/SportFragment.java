@@ -117,12 +117,14 @@ public class SportFragment extends Fragment
 
     @Override
     public void onLoadFinished(@NonNull Loader<List<News>> loader, List<News> newsInfo) {
+        // Hide loading indicator because the data has been loaded
+        getView().findViewById(R.id.progress_bar).setVisibility(View.GONE);
         // Clear the adapter of previous clear data
         mAdapter.clearAll();
         // If there is a valid list of {@link Earthquake}s, then add them to the adapter's
         // data set. This will trigger the ListView to update.
         if (newsInfo != null && !newsInfo.isEmpty()) {
-            mAdapter.addAll(newsInfo);
+//            mAdapter.addAll(newsInfo);
         }
     }
 

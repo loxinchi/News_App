@@ -41,7 +41,6 @@ public class News {
      *
      * @param headline           is the string resource Id for the news headline
      * @param section            is the string resource Id for the news section
-     *                           //     * @param contents is the string resource Id for the news contents
      * @param author             is the string resource Id for the news author
      * @param timeInMilliseconds is the resource ID for the date
      * @param url                is the website URL to news article

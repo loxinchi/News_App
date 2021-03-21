@@ -149,8 +149,6 @@ public final class QueryUtils {
                 // Extract the value for the key called "sectionName"
                 String sectionName = currentNews.getString(Constants.JSON_KEY_SECTION_NAME);
                 JSONObject fields = currentNews.getJSONObject(Constants.JSON_KEY_FIELDS);
-                // Extract the value for the key called "trailText"
-//                String trailText = fields.getString(Constants.JSON_KEY_TRAIL_TEXT);
                 // Extract the value for the key called "byline"
                 String author = fields.optString(Constants.JSON_KEY_BYLINE);
                 // Extract the value for the key called "firstPublicationDate"

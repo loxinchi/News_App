@@ -29,8 +29,6 @@ Source: [Guardian API] (http://open-platform.theguardian.com/documentation/).
 
 ### Video
 
-<img src="https://user-images.githubusercontent.com/76967954/111914190-4c3dfb00-8a71-11eb-98d1-131027d698f2.gif" width="300" height="600">
-
 
 ### Screenshots
 

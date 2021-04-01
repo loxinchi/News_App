@@ -17,12 +17,11 @@ public class Constants {
     static final String JSON_KEY_RESULTS = "results";
     static final String JSON_KEY_WEB_TITLE = "webTitle";
     static final String JSON_KEY_SECTION_NAME = "sectionName";
-    static final String JSON_KEY_FIRST_PUBLICATION_DATE = "firstPublicationDate";
+    static final String JSON_KEY_WEB_PUBLICATION_DATE = "webPublicationDate";
     static final String JSON_KEY_WEB_URL = "webUrl";
     static final String JSON_KEY_BYLINE = "byline";
     static final String JSON_KEY_FIELDS = "fields";
     static final String JSON_KEY_THUMBNAIL = "thumbnail";
-    static final String JSON_KEY_TRAIL_TEXT = "trailText";
 
     /** Read timeout for setting up the HTTP request */
     static final int READ_TIMEOUT = 10000; /* milliseconds */

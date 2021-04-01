@@ -28,6 +28,7 @@ import com.example.android.newsapp.News;
 import com.example.android.newsapp.NewsLoader;
 import com.example.android.newsapp.R;
 import com.example.android.newsapp.adapter.NewsAdapter;
+import com.example.android.newsapp.utils.Constants;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,11 +37,6 @@ public class WorldFragment extends Fragment
         implements LoaderManager.LoaderCallbacks<List<News>> {
 
     private static final String LOG_TAG = WorldFragment.class.getName();
-
-    /**
-     * URI for earthquake data from the The Guardian dataset
-     */
-    private static final String GUARDIAN_REQUEST_URL = "https://content.guardianapis.com/search";
 
     /**
      * TextView that is displayed when the list is empty
@@ -103,10 +99,14 @@ public class WorldFragment extends Fragment
                 getString(R.string.settings_order_by_default)
         );
         // parse breaks apart the URI string that's passed into its parameter
-        Uri baseUri = Uri.parse(GUARDIAN_REQUEST_URL);
+        Uri baseUri = Uri.parse(Constants.NEWS_REQUEST_URL);
         // buildUpon prepares the baseUri that we just parsed so we can add query parameters to it
         Uri.Builder uriBuilder = baseUri.buildUpon();
-        // Append query parameter and its value. For example, the `format=json`
+        // if orderBy value equals to "relevance", add "q=covid AND NOT coronavirus" in query string
+        if(orderBy.equals("relevance")){
+            //Append query parameter and its value. For example, the `format=json`
+            uriBuilder.appendQueryParameter("q", "covid AND NOT coronavirus");
+        }
         uriBuilder.appendQueryParameter("section", "world");
         uriBuilder.appendQueryParameter("format", "json");
         uriBuilder.appendQueryParameter("from-date", "2021-01-01");

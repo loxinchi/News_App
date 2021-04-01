@@ -148,15 +148,17 @@ public final class QueryUtils {
                 String url = currentNews.getString(Constants.JSON_KEY_WEB_URL);
                 // Extract the value for the key called "sectionName"
                 String sectionName = currentNews.getString(Constants.JSON_KEY_SECTION_NAME);
+                // Extract the value for the key called "webPublicationDate"
+                String webPublicationDate = currentNews.getString(Constants.JSON_KEY_WEB_PUBLICATION_DATE);
                 JSONObject fields = currentNews.getJSONObject(Constants.JSON_KEY_FIELDS);
                 // Extract the value for the key called "byline"
                 String author = fields.optString(Constants.JSON_KEY_BYLINE);
-                // Extract the value for the key called "firstPublicationDate"
-                String firstPublicationDate = fields.getString(Constants.JSON_KEY_FIRST_PUBLICATION_DATE);
+//                // Extract the value for the key called "webPublicationDate"
+//                String webPublicationDate = fields.getString(Constants.JSON_KEY_WEB_PUBLICATION_DATE);
                 // Extract the value for the key called "thumbnail"
                 String thumbnail = fields.getString(Constants.JSON_KEY_THUMBNAIL);
                 // Create a new {@link Earthquake} object
-                News news = new News(webTitle, sectionName, author, firstPublicationDate, url, thumbnail);
+                News news = new News(webTitle, sectionName, author, webPublicationDate, url, thumbnail);
                 // Add the new {@link Earthquake} to the list of earthquakes.
                 newsList.add(news);
             }

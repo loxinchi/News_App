@@ -27,7 +27,7 @@ Source: [Guardian API] (http://open-platform.theguardian.com/documentation/).
 * RecyclerView
 * SharedPreferences
 
-### Video
+### DEMO
 
 <img src="https://user-images.githubusercontent.com/76967954/113293742-7061cd80-92f6-11eb-8e1d-ed1d858bab8b.gif" width="200" height="400">
 

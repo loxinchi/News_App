@@ -153,8 +153,6 @@ public final class QueryUtils {
                 JSONObject fields = currentNews.getJSONObject(Constants.JSON_KEY_FIELDS);
                 // Extract the value for the key called "byline"
                 String author = fields.optString(Constants.JSON_KEY_BYLINE);
-//                // Extract the value for the key called "webPublicationDate"
-//                String webPublicationDate = fields.getString(Constants.JSON_KEY_WEB_PUBLICATION_DATE);
                 // Extract the value for the key called "thumbnail"
                 String thumbnail = fields.getString(Constants.JSON_KEY_THUMBNAIL);
                 // Create a new {@link Earthquake} object

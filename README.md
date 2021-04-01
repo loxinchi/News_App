@@ -8,7 +8,7 @@ A News feed app which gives a user regularly-updated news from the internet rela
 person, or location.
 No external libraries.
 
-# NewsFeed 
+### NewsFeed 
 
 Source: [Guardian API] (http://open-platform.theguardian.com/documentation/). 
 
